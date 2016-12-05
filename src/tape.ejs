@@ -6,7 +6,7 @@ var path = require("path");
 <% Object.keys(req._headers).forEach(function (key) { -%>
  * <%- key %>: <%- req._headers[key].replace('/*', '/ *').replace('*/', '* /') %>
 <% }); -%>
- * <%- JSON.stringify(reqBody) %>
+ * <%- reqBody.toString() %>
  */
 
 module.exports = function (req, res) {
@@ -19,7 +19,7 @@ module.exports = function (req, res) {
   res.setHeader("x-yakbak-tape", path.basename(__filename, ".js"));
 
 <% body.forEach(function (data) { -%>
-  res.write(new Buffer(<%- JSON.stringify(data) %>));
+  res.write(new Buffer(<%- JSON.stringify(data.toString()) %>));
 <% }); -%>
   res.end();
 
