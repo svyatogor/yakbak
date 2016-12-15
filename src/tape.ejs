@@ -1,27 +1,29 @@
+/* eslint-disable */
+
 var path = require("path");
 
 /**
- * <%- req.method %> <%- decodeURIComponent(req.path) %>
- *
+* <%- req.method %> <%- decodeURIComponent(req.path) %>
+*
 <% Object.keys(req._headers).forEach(function (key) { -%>
- * <%- key %>: <%- req._headers[key].replace('/*', '/ *').replace('*/', '* /') %>
+* <%- key %>: <%- req._headers[key].replace('/*', '/ *').replace('*/', '* /') %>
 <% }); -%>
- * <%- reqBody.toString() %>
- */
+* <%- reqBody.toString() %>
+*/
 
 module.exports = function (req, res) {
-  res.statusCode = <%- JSON.stringify(res.statusCode) %>;
+res.statusCode = <%- JSON.stringify(res.statusCode) %>;
 
 <% Object.keys(res.headers).forEach(function (key) { -%>
-  res.setHeader(<%- JSON.stringify(key) %>, <%- JSON.stringify(res.headers[key]) %>);
+res.setHeader(<%- JSON.stringify(key) %>, <%- JSON.stringify(res.headers[key]) %>);
 <% }); -%>
 
-  res.setHeader("x-yakbak-tape", path.basename(__filename, ".js"));
+res.setHeader("x-yakbak-tape", path.basename(__filename, ".js"));
 
 <% body.forEach(function (data) { -%>
-  res.write(new Buffer(<%- JSON.stringify(data.toString()) %>));
+res.write(new Buffer(<%- JSON.stringify(data.toString()) %>));
 <% }); -%>
-  res.end();
+res.end();
 
-  return __filename;
+return __filename;
 };

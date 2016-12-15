@@ -39,7 +39,7 @@ module.exports = function (host, opts) {
         if (opts.noRecord) {
           throw new RecordingDisabledError('Recording Disabled');
         } else {
-          return proxy(req, body, host).then(function (pres) {
+          return proxy(req, body, host, opts).then(function (pres) {
             return record(pres.req, pres, file, body);
           });
         }
@@ -70,6 +70,7 @@ module.exports = function (host, opts) {
  */
 
 function tapename(req, body) {
+  console.log(req.trailers)
   return hash.sync(req, Buffer.concat(body)) + '.js';
 }
 
