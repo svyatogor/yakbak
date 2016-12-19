@@ -70,7 +70,6 @@ module.exports = function (host, opts) {
  */
 
 function tapename(req, body) {
-  console.log(req.trailers)
   return hash.sync(req, Buffer.concat(body)) + '.js';
 }
 
