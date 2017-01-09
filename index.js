@@ -2,7 +2,7 @@
 // Licensed under the terms of the MIT license. Please see LICENSE file in the project root for terms.
 
 var Promise = require('bluebird');
-var hash = require('incoming-message-hash');
+var hash = require('./lib/incoming-message-hash');
 var assert = require('assert');
 var mkdirp = require('mkdirp');
 var path = require('path');
